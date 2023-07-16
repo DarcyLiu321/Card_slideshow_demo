@@ -1,0 +1,131 @@
+@import "normalize.css";
+
+:root {
+  font-size: 10px; //代表1rem = 10px
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+@mixin setCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  @include setCenter;
+}
+
+// .card {
+//   width: 20rem;
+//   aspect-ratio: 2/3;
+
+//   background-position: center;
+//   background-size: cover;
+// }
+
+
+
+// .card:nth-child(1) {
+//   width: 120rem;
+//   min-width: 120rem;
+//   aspect-ratio: 16/9;
+//   box-shadow: 0 0 1rem #bebebe;
+// }
+// .card:nth-child(2) {
+//   position: absolute;
+//   left: calc(50%);
+// }
+// .card:nth-child(3) {
+//   position: absolute;
+//   left: calc(50% + 22rem * 1);
+// }
+// .card:nth-child(4) {
+//   position: absolute;
+//   left: calc(50% + 22rem * 2);
+// }
+
+// .card:nth-child(5) {
+//   position: absolute;
+//   opacity: 0.5;
+//   left: calc(50% + 22rem * 3);
+// }
+
+// .card:nth-child(6) {
+//   opacity: 0.5;
+//   position: absolute;
+//   left: calc(50% + 22rem * 4);
+// }
+
+.cardGroup {
+  position: relative;
+  @include setCenter;
+  
+}
+
+@mixin cardSetting($nth) {
+  background-position: center;
+  background-size: cover;
+@if $nth == 1 {
+  min-width: 120rem;
+  aspect-ratio: 16/9;
+  box-shadow: 0 0 1rem #bebebe;
+  transition: none;
+} @else{
+  position: absolute;
+  width: 20rem;
+  aspect-ratio: 2/3;
+  box-shadow: 0 0 1rem #bebebe;
+  left: calc(50% + ($nth - 2) * 22rem);
+  transition: 0.5s;
+} 
+}
+
+$cardArray: (2, 3, 4); //第2，3，4张卡片
+
+.card {
+  transition: 0.5s;
+  &:nth-child(1) {
+    @include cardSetting(1);
+  } //第1张卡片
+
+  @each $i in $cardArray {
+    &:nth-child(#{$i}) {
+      @include cardSetting(#{$i});
+    }
+  } //第2 3 4张卡片
+
+  &:nth-child(n + 5) {
+    @include cardSetting(5);
+
+    opacity: 0;
+  } //从第5张开始之后的卡片
+}
+
+.buttonGroup {
+  position: absolute;
+  @include setCenter;
+  bottom: 5rem;
+  gap: 2rem;
+}
+
+.button {
+  border-radius: 50%;
+  box-shadow: 0 1px 3px #505050;
+  width: 4rem;
+  aspect-ratio: 1/1; //宽高比 此代码相当于高和宽一样
+  // display: block; 疑问？ 和display block同时出现 谁会显示
+  @include setCenter;
+  background-color: #6497bc;
+  cursor: pointer;
+}
+
+.button:active {
+  box-shadow: none;
+}
