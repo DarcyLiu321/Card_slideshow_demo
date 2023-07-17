@@ -12,11 +12,9 @@ import { cardGroup } from './card';
 const appDom = document.getElementById('app');
 
 //card group 此时讲cardGroup这个盒子
-//疑问？ 什么时候append 什么时候append child
-//card group为什么不加引号？
 appDom.append(cardGroup)
 
-//add button
+//add button to cardGroup
 cardGroup.append(buttonGroup)
 
 //获取html内的 .left button
@@ -27,8 +25,8 @@ const rightButton = buttonGroup.querySelector('.right')
 
 //给left button添加事件
 leftButton.addEventListener('click', () => {
-const cardList = cardGroup.querySelectorAll('.card'); //在cardGroup里找到第一张类名为.card的卡片
- cardGroup.prepend(cardList[cardList.length-1]) // 在卡片类名内部前面添加卡片
+const cardList = cardGroup.querySelectorAll('.card'); //在cardGroup里找到所有类名为.card的卡片
+ cardGroup.prepend(cardList[cardList.length-1]) // 把最后一张卡片添加到第一张
 })
 
 //给right button添加事件

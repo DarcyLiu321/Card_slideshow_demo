@@ -69,9 +69,9 @@ body {
   
 }
 
-@mixin cardSetting($nth) {
-  background-position: center;
-  background-size: cover;
+@mixin cardSetting($nth) { //$nth相当于参数 需要传入数字
+  background-position: center; //卡片的公共设置
+  background-size: cover;//卡片的公共设置
 @if $nth == 1 {
   min-width: 120rem;
   aspect-ratio: 16/9;
@@ -87,23 +87,22 @@ body {
 } 
 }
 
-$cardArray: (2, 3, 4); //第2，3，4张卡片
+$cardArray: (2, 3, 4); //第2，3，4张卡片 创造了一个变量叫cardArray
 
 .card {
   transition: 0.5s;
-  &:nth-child(1) {
+  &:nth-child(1) { //&该符号相当于紧贴着.card后面
     @include cardSetting(1);
   } //第1张卡片
 
-  @each $i in $cardArray {
-    &:nth-child(#{$i}) {
+  @each $i in $cardArray { //提取cardArray中的每一项
+    &:nth-child(#{$i}) { //#用来调用
       @include cardSetting(#{$i});
     }
   } //第2 3 4张卡片
 
   &:nth-child(n + 5) {
     @include cardSetting(5);
-
     opacity: 0;
   } //从第5张开始之后的卡片
 }
@@ -120,7 +119,6 @@ $cardArray: (2, 3, 4); //第2，3，4张卡片
   box-shadow: 0 1px 3px #505050;
   width: 4rem;
   aspect-ratio: 1/1; //宽高比 此代码相当于高和宽一样
-  // display: block; 疑问？ 和display block同时出现 谁会显示
   @include setCenter;
   background-color: #6497bc;
   cursor: pointer;
